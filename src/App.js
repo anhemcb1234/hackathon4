@@ -1,25 +1,18 @@
-import React from 'react';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-} from "react-router-dom";
-import About from './components/About';
-import Login from './components/Login';
+import React from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import ToDo from "./components/ToDo";
+import Edit from "./components/Edit";
+import Login from "./components/Login"
 export default function App() {
   return (
-    <div>
+    <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<About />} />
-          <Route path='/login' element = {<Login/>} />
-        
-
+          <Route path="/" element={<Login />} />
+          <Route path="/add" element={<ToDo />} />
+          <Route path="/edit" element={<Edit />} />
         </Routes>
-        {/* <Link to={`/about?name=mien&age=20`}>about</Link> */}
       </BrowserRouter>
-
-    </div>
-  )
+    </>
+  );
 }
