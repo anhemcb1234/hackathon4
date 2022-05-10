@@ -1,11 +1,12 @@
 import { Axios } from "./Axios";
 function addNote(payload) {
-  return Axios.post("login", payload);
+  return Axios.post("/note/add", payload);
 }
+
 function getNote(payload) {
-    return Axios.get("login", payload);
-  }
+  return Axios.post(`/note/find/`, payload);
+}
 export const todoServices = {
   addNote,
-  getNote
+  getNote,
 };

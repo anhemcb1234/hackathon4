@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { todoServices } from "../services/todoServices";
+import uniqid from "uniqid";
 
 export default function ToDo() {
   let navigate = useNavigate();
@@ -14,10 +15,20 @@ export default function ToDo() {
   const _logOut = () => {
     navigate("/");
   };
-  const deleteNote = async (id) => {};
+  const deleteNote = async (id) => {
+
+  };
   const addNote = async () => {
-    console.log(message);
-    setMessage("");
+    try {
+      await todoServices.addNote({
+        id: uniqid(),
+        message,
+        remind: new Date(),
+      });
+      setMessage("");
+    } catch (e) {
+      console.log(e);
+    }
   };
   useEffect(() => {
     console.log(1);
