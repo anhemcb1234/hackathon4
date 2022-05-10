@@ -7,6 +7,8 @@ export default function ToDo() {
 
   const [todos, setTodos] = useState([]);
   const [message, setMessage] = useState("");
+  const [search, setSearch] = useState("");
+
   const [filter, setFilter] = useState([]);
   const [id, setId] = useState(0);
 
@@ -43,6 +45,16 @@ export default function ToDo() {
               name="comment"
               placeholder=""
             ></textarea>
+          </div>
+          <div className="my-10">
+            <label htmlFor="comment" className="text-lg text-gray-600"></label>
+            <input
+              onChange={(evt) => setSearch(evt.target.value)}
+              value={search}
+              className="w-full h-20 p-2 border rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
+              name="comment"
+              placeholder=""
+            ></input>
           </div>
           <div className="flex items-center justify-end">
             <button
