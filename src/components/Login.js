@@ -15,8 +15,8 @@ const Login = () => {
         } else {
             try {
                 const resp = await loginServices.login({
-                  username: this.username,
-                  password: this.password
+                  username,
+                  password
                 })
                 const data = resp.data;
                 localStorage.setItem("token", data.token);
