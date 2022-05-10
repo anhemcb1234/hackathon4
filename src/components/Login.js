@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { loginServices } from "../services/loginServices";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  let navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,11 +22,11 @@ const Login = () => {
         });
         const data = resp.data;
         localStorage.setItem("token", data.token);
-        alert("Đăng nhập thành công");
-        window.location.href = "/";
+        alert("Sign in success");
+        navigate("/add")
       } catch (e) {
         console.log(e);
-        alert("username chưa được đăng ký hoặc mật khẩu không đúng");
+        alert("Sign in failed");
       }
     }
   };
