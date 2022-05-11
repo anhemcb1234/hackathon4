@@ -7,6 +7,7 @@ export default function ToDo() {
   const [message, setMessage] = useState("");
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState([]);
+  const [notefilter, setNotefilter] = useState([]);
   const [id, setId] = useState(0);
 
   const _logOut = () => {
@@ -41,7 +42,7 @@ export default function ToDo() {
     }
   };
   const handlerSearch = (e) => {
-    setSearch(e)
+    
   } 
   useEffect(() => {
     setId(JSON.parse(localStorage.getItem("idUser")));
@@ -87,14 +88,6 @@ export default function ToDo() {
               name="comment"
               placeholder="Search"
             ></input>
-            <div className="flex items-center justify-end">
-              <button
-                onClick={addNote}
-                className="px-3 py-3 absolute top-0 bot-0 text-sm text-blue-100 bg-blue-600 rounded"
-              >
-                Tìm công việc
-              </button>
-            </div>
           </div>
         </div>
         <div className="mt-10">
