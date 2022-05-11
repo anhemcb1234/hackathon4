@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { signupService } from "../services/signupService";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  let navigate = useNavigate()
   const SignUp = async () => {
     if (!username) {
       alert("Username is required ");
@@ -14,6 +17,17 @@ const Signup = () => {
     } else if (!email) {
       alert("Email is required");
     } else {
+      try {
+        await signupService.postUser({
+            username,
+            email,
+            password,
+        });
+        alert('dang ky thanh cong')
+        navigate("/")
+    } catch (e) {
+        console.log(e)
+    }
     }
   };
   return (
@@ -78,12 +92,12 @@ const Signup = () => {
 
         <div className="text-grey-dark mt-6">
           Already have an account?
-          <a
+          <Link
             className="no-underline border-b border-blue text-blue"
-            href="../login/"
+            to = "/signup"
           >
             Log in
-          </a>
+          </Link>
           .
         </div>
       </div>
