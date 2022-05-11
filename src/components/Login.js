@@ -21,6 +21,8 @@ const Login = () => {
           password,
         });
         const data = resp.data;
+        console.log(data)
+        localStorage.setItem("idUser", data.id);
         localStorage.setItem("token", data.token);
         alert("Sign in success");
         navigate("/add")

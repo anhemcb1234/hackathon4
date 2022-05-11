@@ -4,8 +4,6 @@ import { todoServices } from "../services/todoServices";
 
 export default function ToDo() {
   let navigate = useNavigate();
-
-  const [todos, setTodos] = useState([]);
   const [message, setMessage] = useState("");
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState([]);
@@ -14,13 +12,40 @@ export default function ToDo() {
   const _logOut = () => {
     navigate("/");
   };
-  const deleteNote = async (id) => {};
-  const addNote = async () => {
-    console.log(message);
-    setMessage("");
+  const deleteNote = async (uid, id) => {
+    await todoServices.DepleteNote(uid, id);
+    await getNote()
   };
+  const addNote = async () => {
+    try {
+      await todoServices.addNote(
+        {
+          note_des: message,
+          remind: new Date(),
+        },
+        JSON.parse(localStorage.getItem("idUser"))
+      );
+      setMessage("");
+      await getNote()
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const getNote = async () => {
+    try {
+      const resp = await todoServices.getNote(id);
+      console.log("data", resp);
+      setFilter(resp.data)
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const handlerSearch = (e) => {
+    setSearch(e)
+  } 
   useEffect(() => {
-    console.log(1);
+    setId(JSON.parse(localStorage.getItem("idUser")));
+    getNote();
   }, []);
   return (
     <>
@@ -56,7 +81,7 @@ export default function ToDo() {
           <div className="my-5 relative">
             <label htmlFor="comment" className="text-lg text-gray-600"></label>
             <input
-              onChange={(evt) => setSearch(evt.target.value)}
+              onChange={(evt) => handlerSearch(evt.target.value)}
               value={search}
               className="w-full  h-10 p-2 border rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
               name="comment"
@@ -75,11 +100,11 @@ export default function ToDo() {
         <div className="mt-10">
           {filter?.map((item, index) => (
             <div className="flex items-center justify-between my-2" key={index}>
-              <p>{item.message}</p>
+              <p>{item.note_des}</p>
               <div>
-                <Link to={`/edit?id=${item.id}`}>Sửa</Link>
+                <Link to={`/edit?nid=${item.id}&content=${item.note_des}`}>Sửa</Link>
                 <button
-                  onClick={() => deleteNote(item.id)}
+                  onClick={() => deleteNote(item.uid, item.id)}
                   className="px-3 ml-2 py-2 text-sm text-blue-100 bg-blue-600 rounded"
                 >
                   Xóa
