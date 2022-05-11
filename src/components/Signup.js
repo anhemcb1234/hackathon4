@@ -6,7 +6,7 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  let navigate = useNavigate()
+  let navigate = useNavigate();
   const SignUp = async () => {
     if (!username) {
       alert("Username is required ");
@@ -19,15 +19,15 @@ const Signup = () => {
     } else {
       try {
         await signupService.postUser({
-            username,
-            email,
-            password,
+          username,
+          email,
+          password,
         });
-        alert('dang ky thanh cong')
-        navigate("/")
-    } catch (e) {
-        console.log(e)
-    }
+        alert("Sign up success");
+        navigate("/");
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
   return (
@@ -64,13 +64,15 @@ const Signup = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <span id="password-error"></span>
-          <button
-            type="submit"
-            className="w-full text-center py-3 rounded hover:bg-green-dark focus:outline-none my-1"
-            onClick={() => SignUp()}
-          >
-            Create Account
-          </button>
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="text-white px-3 py-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
+              onClick={() => SignUp()}
+            >
+              Create Account
+            </button>
+          </div>
 
           <div className="text-center text-sm text-grey-dark mt-4">
             By signing up, you agree to the
@@ -92,10 +94,7 @@ const Signup = () => {
 
         <div className="text-grey-dark mt-6">
           Already have an account?
-          <Link
-            className="no-underline border-b border-blue text-blue"
-            to = "/signup"
-          >
+          <Link className="underline ml-1 border-b border-blue text-blue" to="/">
             Log in
           </Link>
           .
