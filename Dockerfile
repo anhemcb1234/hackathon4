@@ -1,14 +1,13 @@
 FROM node:lts-alpine as build-dist
 WORKDIR app
 COPY package.json /app
-run npm install
+run yarn install
 COPY . /app
-RUN npm run build
+RUN yarn build
 
 FROM nginx:stable-alpine
 WORKDIR website
 COPY --from=build-dist ./app/dist /website
-COPY ./nginx.conf /etc/nginx/ngix.conf
+COPY ./nginx.conf /etc/nginx/nginx.conf
 EXPOSE 80
-CMD ["nginx","-g", "daemon off;"]
-
+CMD ["nginx", "-g", "daemon off;"]
