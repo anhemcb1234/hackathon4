@@ -18,11 +18,11 @@ const Signup = () => {
       alert("Email is required");
     } else {
       try {
-        await signupService.postUser({
+        await signupService.postUser(JSON.stringify({
           username,
           email,
           password,
-        });
+        }));
         alert("Sign up success");
         navigate("/");
       } catch (e) {

@@ -16,10 +16,7 @@ const Login = () => {
       return;
     } else {
       try {
-        const resp = await loginServices.login({
-          username,
-          password,
-        });
+        const resp = await loginServices.login(JSON.stringify({ username, password }));
         const data = resp.data;
         console.log(data);
         localStorage.setItem("idUser", data.id);

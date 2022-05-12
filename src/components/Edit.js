@@ -12,9 +12,9 @@ const Edit = () => {
   const editNote = async () => {
      try{
       console.log(message)
-      await todoServices.EditNote(id, nid,{
+      await todoServices.EditNote(id, nid,JSON.stringify({
         note_des: message
-      })
+      }))
       setMessage("")
       navigate("/add")
      } catch (e) {

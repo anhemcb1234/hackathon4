@@ -23,10 +23,10 @@ export default function ToDo() {
     try {
       setShowButton(false);
       await todoServices.addNote(
-        {
+        JSON.stringify({
           note_des: message,
           remind: new Date(),
-        },
+        }),
         JSON.parse(localStorage.getItem("idUser"))
       );
       await getNote();
